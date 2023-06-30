@@ -1,0 +1,23 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkup
+        uses: actions/checkout@v2
+
+      - name: Start MongoD
+        run: systemctl start mongod
+
+      - name: Npm start
+        run: npm start
+
+      - name: Run tests
+        run: npm test --no-watch
